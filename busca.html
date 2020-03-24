@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comando Voz</title>
+</head>
+<body>
+    <div class="botao">
+        <button id="falar">Falar</button>
+    </div>
+<script>
+    window.addEventListener('DOMContenteLoaded',function(e){
+        var falar = document.querySelector('#falar');
+
+        if(window.SpeechRecognition || window.webkitSpeechRecognition){
+
+            var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+
+            var recognition = new SpeechRecognition();
+
+            falar.addEventListener('click', function(e){
+                recognition.start();
+            }, false);
+            recognition.addEventListener('result', function(e){
+                console.log(e);
+                var result = e.results[0][0].transcript;
+                console.log(result);
+                window.location.href = 'http://' + result;
+            },false);
+        }else {
+                alert('Este navegador não suporta');
+            }
+        },false);
+    
+
+</script>
+</body>
+</html>
